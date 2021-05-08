@@ -10,6 +10,6 @@ create table if not exists employee(
 --Insert Data
 
 delete from employee;
-insert into employee(name) values ('Sachin-1');
-insert into employee(name) values ('Sachin-2');
+--insert into employee(name) values ('Sachin-1');
+--insert into employee(name) values ('Sachin-2');
 ;
