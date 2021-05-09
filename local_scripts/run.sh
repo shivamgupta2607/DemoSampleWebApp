@@ -42,14 +42,15 @@ function updateNameForId() {
 
 #sampleCall
 
-#saveEmp abcd
-
-
-#findAllEmployees
-
-findById 1
-
+#saveEmp abcd1
 
 #updateNameForId 1 testing
+
+findAllEmployees
+
+#findById 1
+
+
+
 
 
