@@ -26,6 +26,9 @@ public class MyServiceTest extends BaseTest {
     Assert.isTrue(employeeList.size() == 1, String
         .format("There should be exactly one employee with name {%s}, actual size found is {%d}",
             empName, employeeList.size()));
+    Assert.isTrue(employeeList.get(0).getName().equals(empName), String
+        .format("The return name should match with the emp name provided {%s} but found {%s}",
+            empName, employeeList.get(0).getName()));
   }
 
 }
