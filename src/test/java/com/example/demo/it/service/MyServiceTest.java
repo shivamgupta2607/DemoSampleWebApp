@@ -1,7 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.it.service;
 
-import com.example.demo.BaseTest;
+import com.example.demo.it.BaseTest;
 import com.example.demo.entity.Employee;
+import com.example.demo.service.MyService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
