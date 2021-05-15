@@ -1,6 +1,9 @@
 package com.example.demo.other.threads;
 
 import com.example.demo.Util;
+import com.example.demo.other.threads.executorFramework.MyExecutorService;
+import com.example.demo.other.threads.executorFramework.MyExecutors;
+import com.example.demo.other.threads.executorFramework.MyFuture;
 import com.example.demo.other.threads.impl.MyBlockingQueue;
 import com.example.demo.other.threads.impl.MyReadWriteLock;
 import com.example.demo.other.threads.impl.MySynchronizedQueue;
@@ -13,6 +16,18 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 public class SampleThreadExamplesUnitTest {
+
+  @Test
+  public void executorFrameworkExample() throws Exception{
+    final MyExecutorService manager = MyExecutors.newFixedThreadPool(10);
+    final MyFuture<Integer> myFuture = manager.submit( () -> {
+      Thread.currentThread().sleep(2 * 1000);
+      return 20;
+    });
+
+    Util.printStr(myFuture.get());
+  }
+
 
   @Test
   public void blockingQueueExample() throws Exception {
