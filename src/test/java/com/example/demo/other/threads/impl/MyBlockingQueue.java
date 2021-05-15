@@ -1,5 +1,6 @@
 package com.example.demo.other.threads.impl;
 
+import com.example.demo.Util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
@@ -32,7 +33,7 @@ public class MyBlockingQueue<T> {
         cForFull.await();
       }
       list.add(t);
-      System.out.println(String.format("Pushed Element {%s}", t));
+      Util.printStr(String.format("Pushed Element {%s}", t));
       cForEmpty.signalAll();
     } catch (final InterruptedException ex) {
 
@@ -49,7 +50,7 @@ public class MyBlockingQueue<T> {
         cForEmpty.await();
       }
       T e = list.remove(0);
-      System.out.println(String.format("Took element {%s}", e));
+      Util.printStr(String.format("Took element {%s}", e));
       cForFull.signalAll();
     } catch (InterruptedException ex) {
 
@@ -62,15 +63,8 @@ public class MyBlockingQueue<T> {
   public void printQueueState() {
     lock.lock();
     try {
-      System.out.println("Acuired the lock for print..now would hold it for longer..");
-      System.out.print("{");
-      IntStream.range(0, list.size() - 1).forEach(i -> {
-        System.out.print(String.format("%s", list.get(i)));
-        if (i != list.size() - 1) {
-          System.out.print(", ");
-        }
-      });
-      System.out.println("}");
+      Util.printStr("Acuired the lock for print..now would hold it for longer..");
+      Util.printList(list);
     } catch (Exception ex) {
 
     } finally {
