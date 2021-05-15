@@ -1,5 +1,6 @@
 package com.example.demo.other.threads.executorFramework;
 
+import com.example.demo.other.threads.impl.MyBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -7,7 +8,8 @@ import java.util.stream.IntStream;
 
 public class MyExecutorService<T> {
 
-  final BlockingQueue<MyFuture<T>> mbq = new LinkedBlockingQueue<>();
+//  final BlockingQueue<MyFuture<T>> mbq = new LinkedBlockingQueue<>();
+  final MyBlockingQueue<MyFuture<T>> mbq = new MyBlockingQueue<>();
 
   public MyExecutorService(int nThreads) {
 
@@ -34,7 +36,7 @@ public class MyExecutorService<T> {
 
   public MyFuture<T> submit(final Callable<T> callable) {
     final MyFuture<T> myFuture = new MyFuture<>(callable);
-    mbq.add(myFuture);
+    mbq.push(myFuture);
     return myFuture;
   }
 }
