@@ -10,7 +10,7 @@ public class Util {
   public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
   public static void printStr(final Object s) {
-    System.out.println(String.format("[%s][%s]:%s", FORMAT.format(LocalDateTime.now()), Thread.currentThread().getName(), s));
+    System.out.println(String.format("[%s][%s]: %s", FORMAT.format(LocalDateTime.now()), Thread.currentThread().getName(), s));
   }
 
   public static <T> void  printList(final List<T> list) {

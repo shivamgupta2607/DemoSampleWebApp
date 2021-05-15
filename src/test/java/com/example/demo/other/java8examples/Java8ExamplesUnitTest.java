@@ -174,7 +174,7 @@ public class Java8ExamplesUnitTest {
   public void completableFutureExample() throws Exception{
 
     final CompletableFuture<Long> cf = CompletableFuture.supplyAsync( ()-> {
-      System.out.println("Coming to line-1");
+      Util.printStr("Coming to line-1");
       try {
         Thread.currentThread().sleep(1000);
       } catch (InterruptedException e) {
@@ -182,7 +182,7 @@ public class Java8ExamplesUnitTest {
       }
       return 1;
     }).thenApplyAsync( (i) -> {
-      System.out.println("Coming to line-2");
+      Util.printStr("Coming to line-2");
       try {
         Thread.currentThread().sleep(1000);
       } catch (InterruptedException e) {
@@ -190,13 +190,21 @@ public class Java8ExamplesUnitTest {
       }
       return 2L;
     }).thenApplyAsync( (i) -> {
-      System.out.println("Coming to line-3");
+      Util.printStr("Coming to line-3");
       try {
         Thread.currentThread().sleep(1000);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
       return 3L;
+    }).thenApply( (i) -> {
+      Util.printStr("Coming to line-4");
+      try {
+        Thread.currentThread().sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      return 4L;
     });
 
     Util.printStr(cf.get());
