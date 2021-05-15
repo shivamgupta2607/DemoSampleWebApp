@@ -52,6 +52,7 @@ public class MyBlockingQueue<T> {
       T e = list.remove(0);
       Util.printStr(String.format("Took element {%s}", e));
       cForFull.signalAll();
+      return e;
     } catch (InterruptedException ex) {
 
     } finally {

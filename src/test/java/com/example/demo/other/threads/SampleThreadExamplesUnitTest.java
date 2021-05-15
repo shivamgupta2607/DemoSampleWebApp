@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 public class SampleThreadExamplesUnitTest {
 
   @Test
-  public void executorFrameworkExample() throws Exception{
-    final MyExecutorService manager = MyExecutors.newFixedThreadPool(10);
+  public void executorFrameworkExample() throws Exception {
+    final MyExecutorService manager = MyExecutors.newFixedThreadPool(3);
     final MyFuture<Integer> myFuture = manager.submit( () -> {
       Thread.currentThread().sleep(2 * 1000);
       return 20;
