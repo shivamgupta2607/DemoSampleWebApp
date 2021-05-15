@@ -1,5 +1,6 @@
 package com.example.demo.other.java8examples;
 
+import com.example.demo.Util;
 import com.example.demo.vo.EmployeeVO;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -38,7 +40,7 @@ public class Java8ExamplesUnitTest {
 
     final List<Entry<String, Integer>> ll = map.entrySet().stream()
         .sorted((o1, o2) -> o1.getValue() - o2.getValue()).collect(Collectors.toList());
-    System.out.println(ll);
+    Util.printList(ll);
 
     IntStream.range(1, ll.size()).forEach(i -> {
           Assert.isTrue(ll.get(i).getValue() >= ll.get(i - 1).getValue(),
@@ -58,14 +60,14 @@ public class Java8ExamplesUnitTest {
             (map, map2) -> {
             });
 
-    collect.forEach((k, v) -> System.out.println(k + ":" + v));
+    collect.forEach((k, v) -> Util.printStr(k + ":" + v));
   }
 
   @Test
   public void iterateListWithIndexVariableAvailable() {
     final List<String> list = Arrays.asList("zero", "one", "two", "three", "four");
     IntStream.range(0, list.size()).forEach(i -> {
-      System.out.println(String.format("list(%d) : {%s}", i, list.get(i)));
+      Util.printStr(String.format("list(%d) : {%s}", i, list.get(i)));
     });
   }
 
@@ -87,13 +89,13 @@ public class Java8ExamplesUnitTest {
     numbers.forEach(new Consumer<Integer>() {
                       @Override
                       public void accept(Integer integer) {
-                        System.out.println(integer);
+                        Util.printStr(integer);
                       }
                     }
     );
-    System.out.println();
+
     numbers.forEach(e -> {
-      System.out.println(e);
+      Util.printStr(e);
     });
 
   }
@@ -108,7 +110,7 @@ public class Java8ExamplesUnitTest {
 
     final int result = list.parallelStream().filter(e -> e % 2 == 0).reduce(0, (e1, e2) -> e1 + e2);
 
-    System.out.println(result);
+    Util.printStr(result);
 
   }
 
@@ -120,14 +122,14 @@ public class Java8ExamplesUnitTest {
 
     Collections.sort(employeeVOList, (o1, o2) -> o1.getName().compareTo(o2.getName()));
     employeeVOList.stream().forEach(e -> {
-      System.out.println(e);
+      Util.printStr(e);
     });
   }
 
   @Test
   public void lambdaExampleUsingRunnable() throws Exception {
     new Thread(() -> {
-      System.out.println("Thread Name : " + Thread.currentThread().getName());
+      Util.printStr("Thread Name : " + Thread.currentThread().getName());
     }).start();
 
     Thread.currentThread().sleep(1000);
@@ -153,18 +155,51 @@ public class Java8ExamplesUnitTest {
   @Test
   public void printAvailableZones() {
     ZoneId.getAvailableZoneIds().stream().forEach(e -> {
-      System.out.println(e);
+      Util.printStr(e);
     });
   }
 
   @Test
   public void timeAPIs() {
     final LocalDateTime dateTimeInCST = LocalDateTime.now(ZoneId.of("US/Central"));
-    System.out.println(dateTimeInCST);
+    Util.printStr(dateTimeInCST);
 
     final LocalDateTime dateTimeInSG = dateTimeInCST.atZone(ZoneId.of("US/Eastern"))
         .withZoneSameInstant(ZoneId.of("Asia/Singapore")).toLocalDateTime();
-    System.out.println(dateTimeInSG);
+    Util.printStr(dateTimeInSG);
+
+  }
+
+  @Test
+  public void completableFutureExample() throws Exception{
+
+    final CompletableFuture<Long> cf = CompletableFuture.supplyAsync( ()-> {
+      System.out.println("Coming to line-1");
+      try {
+        Thread.currentThread().sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      return 1;
+    }).thenApplyAsync( (i) -> {
+      System.out.println("Coming to line-2");
+      try {
+        Thread.currentThread().sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      return 2L;
+    }).thenApplyAsync( (i) -> {
+      System.out.println("Coming to line-3");
+      try {
+        Thread.currentThread().sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      return 3L;
+    });
+
+    Util.printStr(cf.get());
 
   }
 }
