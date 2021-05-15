@@ -188,7 +188,7 @@ public class Java8ExamplesUnitTest {
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      return 2L;
+      return 2L + i;
     }).thenApplyAsync( (i) -> {
       Util.printStr("Coming to line-3");
       try {
@@ -196,7 +196,7 @@ public class Java8ExamplesUnitTest {
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      return 3L;
+      return 3L+i;
     }).thenApply( (i) -> {
       Util.printStr("Coming to line-4");
       try {
@@ -204,7 +204,7 @@ public class Java8ExamplesUnitTest {
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      return 4L;
+      return 4L+i;
     });
 
     Util.printStr(cf.get());
