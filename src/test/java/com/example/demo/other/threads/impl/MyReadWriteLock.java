@@ -1,6 +1,6 @@
 package com.example.demo.other.threads.impl;
 
-import com.example.demo.Util;
+import com.example.demo.util.GenUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +18,7 @@ public class MyReadWriteLock {
     long writerAcquired = this.threadsAcquiredLock.stream().filter(e -> !e.isReader).count();
     long writerInQueue = this.threadsInQueue.stream().filter(e -> !e.isReader).count();
 
-    Util.printStr(String
+    GenUtil.printStr(String
         .format("readerAcquired {%d}, readerInQueue {%d}, writerAcquired {%d}, writerInQueue {%d}",
             readerAcquired, readerInQueue, writerAcquired, writerInQueue));
 

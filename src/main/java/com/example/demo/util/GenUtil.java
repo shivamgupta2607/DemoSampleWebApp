@@ -1,11 +1,11 @@
-package com.example.demo;
+package com.example.demo.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Util {
+public class GenUtil {
 
   public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

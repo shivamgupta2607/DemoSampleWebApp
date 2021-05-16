@@ -1,6 +1,6 @@
 package com.example.demo.other.threads.impl;
 
-import com.example.demo.Util;
+import com.example.demo.util.GenUtil;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -23,13 +23,13 @@ public class MySynchronizedQueue<T> {
         cNoData.await();
       }
       this.data = t;
-      Util.printStr(String.format("Pushed Element {%s}", t));
+      GenUtil.printStr(String.format("Pushed Element {%s}", t));
       cHasData.signalAll();
 
       while (this.data != null) {
         cNoData.await();
       }
-      Util.printStr(String.format("Consumer has read the element {%s} and hence exiting!\n", t));
+      GenUtil.printStr(String.format("Consumer has read the element {%s} and hence exiting!\n", t));
     } catch (final InterruptedException ex) {
 
     } finally {
@@ -47,7 +47,7 @@ public class MySynchronizedQueue<T> {
       T e = this.data;
       this.data = null;
       cNoData.signalAll();
-      Util.printStr(String.format("Took element {%s}", e));
+      GenUtil.printStr(String.format("Took element {%s}", e));
       return e;
     } catch (InterruptedException ex) {
 
