@@ -43,9 +43,39 @@ public class MyHeap<T extends Comparable> {
   }
 
   public T remove() {
-    return null;
+    final T returnVal = data[0];
+    this.data[0] = this.data[currentNoOfElements];
+    this.data[currentNoOfElements--] = null;
+
+
+    for (int rootIndex = 0;; ) {
+      int firstChildIndex = this.getFirstChildIndex(rootIndex);
+      if (firstChildIndex > this.currentNoOfElements) {
+        break;
+      }
+      int secondChildIndex = this.currentNoOfElements == firstChildIndex ? -1 : firstChildIndex + 1;
+      int smallerDataChildIndex = secondChildIndex == -1
+          || this.data[firstChildIndex].compareTo(this.data[secondChildIndex]) < 0 ? firstChildIndex
+          : secondChildIndex;
+      if (this.isMinHeap && this.data[rootIndex].compareTo(this.data[smallerDataChildIndex]) > 0) {
+        this.swap(this.data, rootIndex, smallerDataChildIndex);
+        rootIndex = smallerDataChildIndex;
+        continue;
+      } else if (!this.isMinHeap
+          && this.data[rootIndex].compareTo(this.data[smallerDataChildIndex]) < 0) {
+        this.swap(this.data, rootIndex, smallerDataChildIndex);
+        rootIndex = smallerDataChildIndex;
+        continue;
+      }
+      break;
+    }
+
+    return returnVal;
   }
 
+  private int getFirstChildIndex(int i) {
+    return 2 * i + 1;
+  }
 
   private void shift(T[] arr, int i, int j) {
     for (int k = i; k <= j; k++) {

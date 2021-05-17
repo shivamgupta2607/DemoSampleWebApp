@@ -1,13 +1,13 @@
 package com.example.demo.others;
 
-import com.example.demo.util.GenUtil;
 import org.junit.jupiter.api.Test;
+import org.springframework.util.Assert;
 
 public class MyHeapTest {
 
   @Test
   public void heapExample() {
-    final MyHeap<Integer> myHeap = new MyHeap<>(10, false);
+    final MyHeap<Integer> myHeap = new MyHeap<>(10, true);
     myHeap.add(10);
     myHeap.add(9);
     myHeap.add(15);
@@ -18,6 +18,9 @@ public class MyHeapTest {
     myHeap.add(13);
     myHeap.add(20);
     myHeap.add(1);
-    GenUtil.printArr(myHeap.getData());
+    Assert.isTrue(myHeap.remove() == 1, "Remove logic broken");
+    Assert.isTrue(myHeap.remove() == 3, "Remove logic broken");
+    Assert.isTrue(myHeap.remove() == 4, "Remove logic broken");
+    Assert.isTrue(myHeap.remove() == 7, "Remove logic broken");
   }
 }
