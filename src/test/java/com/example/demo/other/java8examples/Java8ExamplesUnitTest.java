@@ -1,6 +1,7 @@
 package com.example.demo.other.java8examples;
 
 import com.example.demo.Util;
+import com.example.demo.others.MyHeap;
 import com.example.demo.vo.EmployeeVO;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -29,6 +30,23 @@ import org.springframework.util.Assert;
  */
 public class Java8ExamplesUnitTest {
 
+
+  @Test
+  public void heapExample() {
+    final MyHeap<Integer> myHeap = new MyHeap<>(10, false);
+    myHeap.add(10);
+    myHeap.add(9);
+    myHeap.add(15);
+    myHeap.add(4);
+    myHeap.add(8);
+    myHeap.add(3);
+    myHeap.add(7);
+    myHeap.add(13);
+    myHeap.add(20);
+    myHeap.add(1);
+//    Util.printArr(myHeap.getData());
+
+  }
 
   @Test
   public void sortByValuesInHashMap() {
