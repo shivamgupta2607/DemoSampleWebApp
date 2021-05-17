@@ -1,4 +1,4 @@
-package com.example.demo.other.java8examples;
+package com.example.demo.others.java8examples;
 
 import com.example.demo.util.GenUtil;
 import com.example.demo.vo.EmployeeVO;
@@ -28,7 +28,6 @@ import org.springframework.util.Assert;
  *  - Local Date Time
  */
 public class Java8ExamplesUnitTest {
-
 
   @Test
   public void sortByValuesInHashMap() {

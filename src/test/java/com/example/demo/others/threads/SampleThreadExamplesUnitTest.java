@@ -1,12 +1,12 @@
-package com.example.demo.other.threads;
+package com.example.demo.others.threads;
 
 import com.example.demo.util.GenUtil;
-import com.example.demo.other.threads.executorFramework.MyExecutorService;
-import com.example.demo.other.threads.executorFramework.MyExecutors;
-import com.example.demo.other.threads.executorFramework.MyFuture;
-import com.example.demo.other.threads.impl.MyBlockingQueue;
-import com.example.demo.other.threads.impl.MyReadWriteLock;
-import com.example.demo.other.threads.impl.MySynchronizedQueue;
+import com.example.demo.others.threads.executorFramework.MyExecutorService;
+import com.example.demo.others.threads.executorFramework.MyExecutors;
+import com.example.demo.others.threads.executorFramework.MyFuture;
+import com.example.demo.others.threads.impl.MyBlockingQueue;
+import com.example.demo.others.threads.impl.MyReadWriteLock;
+import com.example.demo.others.threads.impl.MySynchronizedQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

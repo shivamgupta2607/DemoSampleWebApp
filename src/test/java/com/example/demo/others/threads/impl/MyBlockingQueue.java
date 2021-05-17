@@ -1,4 +1,4 @@
-package com.example.demo.other.threads.impl;
+package com.example.demo.others.threads.impl;
 
 import com.example.demo.util.GenUtil;
 import java.util.ArrayList;

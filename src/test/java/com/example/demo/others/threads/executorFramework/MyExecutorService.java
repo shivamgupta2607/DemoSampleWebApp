@@ -1,9 +1,7 @@
-package com.example.demo.other.threads.executorFramework;
+package com.example.demo.others.threads.executorFramework;
 
-import com.example.demo.other.threads.impl.MyBlockingQueue;
-import java.util.concurrent.BlockingQueue;
+import com.example.demo.others.threads.impl.MyBlockingQueue;
 import java.util.concurrent.Callable;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.IntStream;
 
 public class MyExecutorService<T> {
