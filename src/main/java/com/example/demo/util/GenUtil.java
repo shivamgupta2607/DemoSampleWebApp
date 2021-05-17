@@ -1,11 +1,13 @@
-package com.example.demo;
+package com.example.demo.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Util {
+public class GenUtil {
 
   public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -25,5 +27,11 @@ public class Util {
     });
     sb.append("\n");
     printStr(sb.toString());
+  }
+
+  public static <T> void  printArr(final T[] arr) {
+    final List<T> list = new ArrayList<>();
+    Arrays.stream(arr).forEach(list::add);
+    printList(list);
   }
 }

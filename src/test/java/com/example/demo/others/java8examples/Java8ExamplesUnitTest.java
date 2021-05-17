@@ -1,6 +1,6 @@
-package com.example.demo.other.java8examples;
+package com.example.demo.others.java8examples;
 
-import com.example.demo.Util;
+import com.example.demo.util.GenUtil;
 import com.example.demo.others.MyHeap;
 import com.example.demo.vo.EmployeeVO;
 import java.time.LocalDateTime;
@@ -30,24 +30,6 @@ import org.springframework.util.Assert;
  */
 public class Java8ExamplesUnitTest {
 
-
-  @Test
-  public void heapExample() {
-    final MyHeap<Integer> myHeap = new MyHeap<>(10, false);
-    myHeap.add(10);
-    myHeap.add(9);
-    myHeap.add(15);
-    myHeap.add(4);
-    myHeap.add(8);
-    myHeap.add(3);
-    myHeap.add(7);
-    myHeap.add(13);
-    myHeap.add(20);
-    myHeap.add(1);
-//    Util.printArr(myHeap.getData());
-
-  }
-
   @Test
   public void sortByValuesInHashMap() {
     final Map<String, Integer> map = new HashMap<>();
@@ -58,7 +40,7 @@ public class Java8ExamplesUnitTest {
 
     final List<Entry<String, Integer>> ll = map.entrySet().stream()
         .sorted((o1, o2) -> o1.getValue() - o2.getValue()).collect(Collectors.toList());
-    Util.printList(ll);
+    GenUtil.printList(ll);
 
     IntStream.range(1, ll.size()).forEach(i -> {
           Assert.isTrue(ll.get(i).getValue() >= ll.get(i - 1).getValue(),
@@ -78,14 +60,14 @@ public class Java8ExamplesUnitTest {
             (map, map2) -> {
             });
 
-    collect.forEach((k, v) -> Util.printStr(k + ":" + v));
+    collect.forEach((k, v) -> GenUtil.printStr(k + ":" + v));
   }
 
   @Test
   public void iterateListWithIndexVariableAvailable() {
     final List<String> list = Arrays.asList("zero", "one", "two", "three", "four");
     IntStream.range(0, list.size()).forEach(i -> {
-      Util.printStr(String.format("list(%d) : {%s}", i, list.get(i)));
+      GenUtil.printStr(String.format("list(%d) : {%s}", i, list.get(i)));
     });
   }
 
@@ -107,13 +89,13 @@ public class Java8ExamplesUnitTest {
     numbers.forEach(new Consumer<Integer>() {
                       @Override
                       public void accept(Integer integer) {
-                        Util.printStr(integer);
+                        GenUtil.printStr(integer);
                       }
                     }
     );
 
     numbers.forEach(e -> {
-      Util.printStr(e);
+      GenUtil.printStr(e);
     });
 
   }
@@ -128,7 +110,7 @@ public class Java8ExamplesUnitTest {
 
     final int result = list.parallelStream().filter(e -> e % 2 == 0).reduce(0, (e1, e2) -> e1 + e2);
 
-    Util.printStr(result);
+    GenUtil.printStr(result);
 
   }
 
@@ -140,14 +122,14 @@ public class Java8ExamplesUnitTest {
 
     Collections.sort(employeeVOList, (o1, o2) -> o1.getName().compareTo(o2.getName()));
     employeeVOList.stream().forEach(e -> {
-      Util.printStr(e);
+      GenUtil.printStr(e);
     });
   }
 
   @Test
   public void lambdaExampleUsingRunnable() throws Exception {
     new Thread(() -> {
-      Util.printStr("Thread Name : " + Thread.currentThread().getName());
+      GenUtil.printStr("Thread Name : " + Thread.currentThread().getName());
     }).start();
 
     Thread.currentThread().sleep(1000);
@@ -173,18 +155,18 @@ public class Java8ExamplesUnitTest {
   @Test
   public void printAvailableZones() {
     ZoneId.getAvailableZoneIds().stream().forEach(e -> {
-      Util.printStr(e);
+      GenUtil.printStr(e);
     });
   }
 
   @Test
   public void timeAPIs() {
     final LocalDateTime dateTimeInCST = LocalDateTime.now(ZoneId.of("US/Central"));
-    Util.printStr(dateTimeInCST);
+    GenUtil.printStr(dateTimeInCST);
 
     final LocalDateTime dateTimeInSG = dateTimeInCST.atZone(ZoneId.of("US/Eastern"))
         .withZoneSameInstant(ZoneId.of("Asia/Singapore")).toLocalDateTime();
-    Util.printStr(dateTimeInSG);
+    GenUtil.printStr(dateTimeInSG);
 
   }
 
@@ -192,7 +174,7 @@ public class Java8ExamplesUnitTest {
   public void completableFutureExample() throws Exception{
 
     final CompletableFuture<Long> cf = CompletableFuture.supplyAsync( ()-> {
-      Util.printStr("Coming to line-1");
+      GenUtil.printStr("Coming to line-1");
       try {
         Thread.currentThread().sleep(1000);
       } catch (InterruptedException e) {
@@ -200,7 +182,7 @@ public class Java8ExamplesUnitTest {
       }
       return 1;
     }).thenApplyAsync( (i) -> {
-      Util.printStr("Coming to line-2");
+      GenUtil.printStr("Coming to line-2");
       try {
         Thread.currentThread().sleep(1000);
       } catch (InterruptedException e) {
@@ -208,7 +190,7 @@ public class Java8ExamplesUnitTest {
       }
       return 2L + i;
     }).thenApplyAsync( (i) -> {
-      Util.printStr("Coming to line-3");
+      GenUtil.printStr("Coming to line-3");
       try {
         Thread.currentThread().sleep(1000);
       } catch (InterruptedException e) {
@@ -216,7 +198,7 @@ public class Java8ExamplesUnitTest {
       }
       return 3L+i;
     }).thenApply( (i) -> {
-      Util.printStr("Coming to line-4");
+      GenUtil.printStr("Coming to line-4");
       try {
         Thread.currentThread().sleep(1000);
       } catch (InterruptedException e) {
@@ -225,7 +207,7 @@ public class Java8ExamplesUnitTest {
       return 4L+i;
     });
 
-    Util.printStr(cf.get());
+    GenUtil.printStr(cf.get());
 
   }
 }

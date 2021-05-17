@@ -1,12 +1,12 @@
-package com.example.demo.other.threads;
+package com.example.demo.others.threads;
 
-import com.example.demo.Util;
-import com.example.demo.other.threads.executorFramework.MyExecutorService;
-import com.example.demo.other.threads.executorFramework.MyExecutors;
-import com.example.demo.other.threads.executorFramework.MyFuture;
-import com.example.demo.other.threads.impl.MyBlockingQueue;
-import com.example.demo.other.threads.impl.MyReadWriteLock;
-import com.example.demo.other.threads.impl.MySynchronizedQueue;
+import com.example.demo.util.GenUtil;
+import com.example.demo.others.threads.executorFramework.MyExecutorService;
+import com.example.demo.others.threads.executorFramework.MyExecutors;
+import com.example.demo.others.threads.executorFramework.MyFuture;
+import com.example.demo.others.threads.impl.MyBlockingQueue;
+import com.example.demo.others.threads.impl.MyReadWriteLock;
+import com.example.demo.others.threads.impl.MySynchronizedQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,7 +25,7 @@ public class SampleThreadExamplesUnitTest {
       return 20;
     });
 
-    Util.printStr(myFuture.get());
+    GenUtil.printStr(myFuture.get());
   }
 
 
@@ -106,7 +106,7 @@ public class SampleThreadExamplesUnitTest {
       while(true) {
         try {
           myReadWriteLock.readLock();
-          Util.printList(list);
+          GenUtil.printList(list);
           myReadWriteLock.readUnLock();
           Thread.currentThread().sleep(200);
         } catch (InterruptedException e) {
@@ -119,7 +119,7 @@ public class SampleThreadExamplesUnitTest {
       while(true) {
         try {
           myReadWriteLock.writeLock();
-          Util.printStr("Acquired write lock.....");
+          GenUtil.printStr("Acquired write lock.....");
           list.add(new Random().nextInt(100));
           Thread.currentThread().sleep(2 * 1000);
           myReadWriteLock.writeUnLock();

@@ -1,12 +1,11 @@
-package com.example.demo.other.threads.impl;
+package com.example.demo.others.threads.impl;
 
-import com.example.demo.Util;
+import com.example.demo.util.GenUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.IntStream;
 
 public class MyBlockingQueue<T> {
 
@@ -33,7 +32,7 @@ public class MyBlockingQueue<T> {
         cForFull.await();
       }
       list.add(t);
-      Util.printStr(String.format("Pushed Element {%s}", t));
+      GenUtil.printStr(String.format("Pushed Element {%s}", t));
       cForEmpty.signalAll();
     } catch (final InterruptedException ex) {
 
@@ -50,7 +49,7 @@ public class MyBlockingQueue<T> {
         cForEmpty.await();
       }
       T e = list.remove(0);
-      Util.printStr(String.format("Took element {%s}", e));
+      GenUtil.printStr(String.format("Took element {%s}", e));
       cForFull.signalAll();
       return e;
     } catch (InterruptedException ex) {
@@ -64,8 +63,8 @@ public class MyBlockingQueue<T> {
   public void printQueueState() {
     lock.lock();
     try {
-      Util.printStr("Acuired the lock for print..now would hold it for longer..");
-      Util.printList(list);
+      GenUtil.printStr("Acuired the lock for print..now would hold it for longer..");
+      GenUtil.printList(list);
     } catch (Exception ex) {
 
     } finally {
