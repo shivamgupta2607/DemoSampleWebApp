@@ -16,7 +16,7 @@
  
  
 ##### To Run the Test Case
- - <code>mvn clean test -Dtest=com.example.demo.service.MyServiceTest#empSave</code>
+ - <code>mvn clean test -Dtest=com.example.demo.it.service.MyServiceTest#empSave</code>
 
 
 ##### Don't forget to check the [Youtube Video](https://www.youtube.com/watch?v=SwUNDUOvg_k)
