@@ -3,7 +3,7 @@
 
 
 ##### Bring up the DB
- - <code>git clone https://github.com/skshukla/infra.git && cd infra && chmod +x run_postgres/run_postgres.sh && ./run_postgres/run_postgres.sh</code>
+ - <code>docker run --rm --name pg_sachin -e POSTGRES_USER=sachin -e POSTGRES_PASSWORD=123456 -e POSTGRES_DB=mydb -p 5432:5432 -d postgres:9.6.14</code>
 
 ##### Check whether its working fine
  - <code>docker exec -it sachin_pg_c psql -h localhost --user sachin --db mydb</code>
