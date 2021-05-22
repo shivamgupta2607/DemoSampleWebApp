@@ -22,8 +22,7 @@ public class MyExecutorService<T> {
       while(true) {
         try {
           final MyFuture<T> myFuture = mbq.take();
-          final T t = myFuture.getCallable().call();
-          myFuture.set(t);
+          myFuture.execute();
         } catch (Exception e) {
           e.printStackTrace();
         }

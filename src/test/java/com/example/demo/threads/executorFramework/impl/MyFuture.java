@@ -1,11 +1,11 @@
 package com.example.demo.threads.executorFramework.impl;
 
+import com.example.demo.threads.impl.MyBlockingQueue;
 import java.util.concurrent.Callable;
-import java.util.concurrent.SynchronousQueue;
 
 public class MyFuture<T> {
 
-  private final SynchronousQueue<T> synchronousQueue = new SynchronousQueue<>();
+  private final MyBlockingQueue<T> myQueue = new MyBlockingQueue<>();
   private Callable<T> callable = null;
 
   public MyFuture(final Callable<T> callable) {
@@ -14,14 +14,12 @@ public class MyFuture<T> {
 
   public T get() throws InterruptedException {
 
-    return synchronousQueue.take();
+    return myQueue.take();
   }
 
-  protected void set(T t) {
-    synchronousQueue.add(t);
+  protected void execute() throws Exception {
+    final T t = this.callable.call();
+    myQueue.push(t);
   }
 
-  public Callable<T> getCallable() {
-    return callable;
-  }
 }
