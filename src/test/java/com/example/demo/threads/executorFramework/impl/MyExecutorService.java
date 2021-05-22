@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 public class MyExecutorService<T> {
 
-//  final BlockingQueue<MyFuture<T>> mbq = new LinkedBlockingQueue<>();
   final MyBlockingQueue<MyFuture<T>> mbq = new MyBlockingQueue<>();
 
   public MyExecutorService(int nThreads) {
