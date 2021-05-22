@@ -1,4 +1,4 @@
-package com.example.demo.others.java8examples;
+package com.example.demo.java8examples;
 
 import com.example.demo.util.GenUtil;
 import com.example.demo.vo.EmployeeVO;
@@ -26,6 +26,7 @@ import org.springframework.util.Assert;
  *  - Streams (map, filter, reduce, collect)
  *  - Optional
  *  - Local Date Time
+ *  - CompletableFuture
  */
 public class Java8ExamplesUnitTest {
 

@@ -1,4 +1,4 @@
-package com.example.demo.others.threads.executorFramework;
+package com.example.demo.threads.executorFramework.impl;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.SynchronousQueue;

@@ -1,4 +1,4 @@
-package com.example.demo.others.java8examples;
+package com.example.demo.java8examples;
 
 @FunctionalInterface
 public interface MyPredicate<T> {

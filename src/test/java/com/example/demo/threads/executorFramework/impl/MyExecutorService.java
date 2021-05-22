@@ -1,6 +1,6 @@
-package com.example.demo.others.threads.executorFramework;
+package com.example.demo.threads.executorFramework.impl;
 
-import com.example.demo.others.threads.impl.MyBlockingQueue;
+import com.example.demo.threads.impl.MyBlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.stream.IntStream;
 

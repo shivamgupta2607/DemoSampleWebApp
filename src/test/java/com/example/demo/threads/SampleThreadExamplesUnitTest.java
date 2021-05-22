@@ -1,12 +1,10 @@
-package com.example.demo.others.threads;
+package com.example.demo.threads;
 
+import com.example.demo.threads.impl.MyBlockingQueue;
+import com.example.demo.threads.impl.MyHeap;
+import com.example.demo.threads.impl.MyReadWriteLock;
+import com.example.demo.threads.impl.MySynchronizedQueue;
 import com.example.demo.util.GenUtil;
-import com.example.demo.others.threads.executorFramework.MyExecutorService;
-import com.example.demo.others.threads.executorFramework.MyExecutors;
-import com.example.demo.others.threads.executorFramework.MyFuture;
-import com.example.demo.others.threads.impl.MyBlockingQueue;
-import com.example.demo.others.threads.impl.MyReadWriteLock;
-import com.example.demo.others.threads.impl.MySynchronizedQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,20 +12,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
+import org.springframework.util.Assert;
 
 public class SampleThreadExamplesUnitTest {
-
-  @Test
-  public void executorFrameworkExample() throws Exception {
-    final MyExecutorService manager = MyExecutors.newFixedThreadPool(3);
-    final MyFuture<Integer> myFuture = manager.submit( () -> {
-      Thread.currentThread().sleep(2 * 1000);
-      return 20;
-    });
-
-    GenUtil.printStr(myFuture.get());
-  }
-
 
   @Test
   public void blockingQueueExample() throws Exception {
@@ -54,7 +41,7 @@ public class SampleThreadExamplesUnitTest {
     });
     manager.shutdown();
 
-    manager.awaitTermination(30, TimeUnit.SECONDS);
+    manager.awaitTermination(10, TimeUnit.SECONDS);
 
     Thread.currentThread().sleep(1000);
     bq.printQueueState();
@@ -83,7 +70,7 @@ public class SampleThreadExamplesUnitTest {
     });
     manager.shutdown();
 
-    manager.awaitTermination(30, TimeUnit.SECONDS);
+    manager.awaitTermination(10, TimeUnit.SECONDS);
   }
 
   /**
@@ -138,9 +125,28 @@ public class SampleThreadExamplesUnitTest {
     manager.submit(r2_Writer);
     manager.shutdown();
 
-    manager.awaitTermination(30, TimeUnit.SECONDS);
+    manager.awaitTermination(10, TimeUnit.SECONDS);
 
 
+  }
+
+  @Test
+  public void heapExample() {
+    final MyHeap<Integer> myHeap = new MyHeap<>(10, true);
+    myHeap.add(10);
+    myHeap.add(9);
+    myHeap.add(15);
+    myHeap.add(4);
+    myHeap.add(8);
+    myHeap.add(3);
+    myHeap.add(7);
+    myHeap.add(13);
+    myHeap.add(20);
+    myHeap.add(1);
+    Assert.isTrue(myHeap.remove() == 1, "Remove logic broken");
+    Assert.isTrue(myHeap.remove() == 3, "Remove logic broken");
+    Assert.isTrue(myHeap.remove() == 4, "Remove logic broken");
+    Assert.isTrue(myHeap.remove() == 7, "Remove logic broken");
   }
 }
 
